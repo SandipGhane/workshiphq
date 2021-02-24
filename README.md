@@ -1,7 +1,7 @@
 # WorkshipHQ Assignment
 
 ## netlify production link
-```[Check Deploy Link](https://60364b6d78bd9d0008ce76ce--sharp-cori-18781c.netlify.app/)```
+```[Check Deploy link](https://60364b6d78bd9d0008ce76ce--sharp-cori-18781c.netlify.app/)```
 
 ## Steps to run localy
 
