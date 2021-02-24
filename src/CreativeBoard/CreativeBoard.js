@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Cards from "../Cards/Cards";
+import { Link } from "react-router-dom";
 import "../App.css";
 class CreativeBoard extends Component {
     state = {
@@ -59,7 +60,8 @@ class CreativeBoard extends Component {
                     <Row>
                         {cards}
                     </Row>
-                    <Button variant="outline-info">Add More List</Button>
+                    <Button variant="outline-info" style={{ marginBottom: 20 }}>Add More List</Button>
+                    <Link to="/thingstodo"><h6>Click here to go and add things to get done</h6></Link>
                 </Container>
             </React.Fragment >
         )

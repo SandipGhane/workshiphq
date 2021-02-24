@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Modal, ModalDialog, Button, Form, Card } from "react-bootstrap";
 import "./Cards.css";
 
@@ -15,9 +16,11 @@ const Cards = (props) => {
     let todos;
     if (props.todos.length > 0) {
         todos = props.todos.map((msg, id) => {
-            return <Card key={id} className="lists">
-                <p>{msg}</p>
-            </Card>
+            return (
+                <Card key={id} className="lists">
+                    <p>{msg}</p>
+                </Card>
+            )
         })
     }
     return (
