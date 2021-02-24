@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, } from "react-router-dom";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Modal, ModalDialog, Button, Form, Card } from "react-bootstrap";
 import "./Cards.css";
 
