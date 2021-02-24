@@ -1,5 +1,8 @@
 # WorkshipHQ Assignment
 
+## netlify production link
+```[Link](https://60364b6d78bd9d0008ce76ce--sharp-cori-18781c.netlify.app/)```
+
 ## Steps to run localy
 
 1) Clone repo in local using following command
