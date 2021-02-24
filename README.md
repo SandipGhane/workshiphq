@@ -1,2 +1,2 @@
-# workshoHQ
+# workshipHQ
 ReactJS assignment
