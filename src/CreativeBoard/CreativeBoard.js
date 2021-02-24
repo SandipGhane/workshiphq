@@ -28,7 +28,7 @@ class CreativeBoard extends Component {
     }
     setTodos = (e, id) => {
         const newCardsData = this.state.cardsData.map((c, idx) => {
-            if (id === idx && this.state.todoMsg != '') {
+            if (id === idx && this.state.todoMsg !== '') {
                 c.todos.push(this.state.todoMsg);
                 return c;
             }
