@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Cards from "../Cards/Cards";
+import { connect } from 'react-redux';
+import axios from "axios";
 import "../App.css";
 class ThingsToDo extends Component {
     constructor() {
@@ -12,11 +14,11 @@ class ThingsToDo extends Component {
     state = {
         showModal: false,
         todoMsg: '',
-        cardsData: [
-            { name: 'To Do', show: false, only: true, todos: [] },
-            { name: 'Doing', show: false, todos: [] },
-            { name: 'Done', show: false, todos: [] },
-        ],
+        // cardsData: [
+        //     { name: 'To Do', show: false, only: true, todos: [] },
+        //     { name: 'Doing', show: false, todos: [] },
+        //     { name: 'Done', show: false, todos: [] },
+        // ],
         dragging: false
     }
     handleClick = (e, id) => {
@@ -27,34 +29,61 @@ class ThingsToDo extends Component {
             }
             return c;
         })
-        console.log('newCardsData', newCardsData);
         this.setState({
             cardsData: newCardsData,
         })
     }
     setTodos = (e, id) => {
-        const newCardsData = this.state.cardsData.map((c, idx) => {
-            if (id === idx && this.state.todoMsg !== '') {
-                c.todos.push(this.state.todoMsg);
-                return c;
-            }
-            return c;
+        const apiData = {
+            name: this.props.loginUser.name,
+            email: this.props.loginUser.email,
+            todoStatus: "todo",
+            tododata: this.state.todoMsg
+        }
+        axios.post('http://localhost:5000/todo/addtodo', apiData).then((res) => {
+            console.log("api response", res.data);
+        }).catch((err) => {
+            console.log("error", err);
         })
-        this.setState({
-            cardsData: newCardsData,
-            todoMsg: ''
-        })
+        axios.get(`http://localhost:5000/todo/getAlltodos?email=${this.props.loginUser.email}`).then((res) => {
+            console.log("res data", res.data);
+            var todos = [];
+            var doings = [];
+            var dones = [];
+            var AllData = [];
+            res.data.forEach((todo) => {
+                if (todo.todoStatus === "todo") {
+                    todos.push(todo.todoData);
+                } else if (todo.todoStatus === "doing") {
+                    doings.push(todo.todoData);
+                } else {
+                    dones.push(todo.todoData);
+                }
+            });
+            var todo = { name: 'To Do', show: false, only: true, todos: [] };
+            var doing = { name: 'Doing', show: false, todos: [] };
+            var done = { name: 'Done', show: false, todos: [] };
+            todo.todos = todos;
+            doing.todos = doings;
+            done.todos = dones;
+            AllData.push(todo);
+            AllData.push(doing);
+            AllData.push(done);
+            console.log("All Data", AllData);
+            this.setState({
+                cardsData: AllData
+            })
+        }).catch((err) => console.log("err", err))
     }
     handleDragEnter = (e, obj) => {
         console.log('handle dragg enter', obj);
     }
     handelDragEnd = () => {
-        debugger
-        console.log("Drag End");
-        console.log('dragNode', this.dragNode.current);
-        console.log('myRef', this.myRef.current);
         const dragData = [];
         var val = "";
+        var apiData = {
+            email: this.props.loginUser.email,
+        }
         this.state.cardsData.forEach((c) => {
             if (this.myRef.current.card === 0) {
                 if (c.name === "To Do") {
@@ -62,7 +91,11 @@ class ThingsToDo extends Component {
                     let filterArr = c.todos.filter((value, id) => id !== this.myRef.current.id);
                     c['todos'] = filterArr;
                 } else if (c.name === "Doing") {
-                    console.log("value", val);
+                    apiData.todoStatus = "doing";
+                    apiData.tododata = val;
+                    axios.post('http://localhost:5000/todo/updatestatus', apiData).then((res) => {
+                        console.log('res', res);
+                    }).catch(err => console.log(err));
                     c['todos'].push(val);
                 }
                 dragData.push(c);
@@ -72,13 +105,16 @@ class ThingsToDo extends Component {
                     let filterArr = c.todos.filter((value, id) => id !== this.myRef.current.id);
                     c['todos'] = filterArr;
                 } else if (c.name === "Done") {
-                    console.log("value", val);
+                    apiData.todoStatus = "done";
+                    apiData.tododata = val;
+                    axios.post('http://localhost:5000/todo/updatestatus', apiData).then((res) => {
+                        console.log('res', res);
+                    }).catch(err => console.log(err));
                     c['todos'].push(val);
                 }
                 dragData.push(c);
             }
         })
-        // console.log('dragData', dragData);
         this.setState({
             cardsData: dragData
         })
@@ -97,7 +133,47 @@ class ThingsToDo extends Component {
             todoMsg: e.target.value
         })
     }
+    componentDidMount() {
+        axios.get(`http://localhost:5000/todo/getAlltodos?email=${this.props.loginUser.email}`).then((res) => {
+            console.log("res data", res.data);
+            var todos = [];
+            var doings = [];
+            var dones = [];
+            var AllData = [];
+            res.data.forEach((todo) => {
+                if (todo.todoStatus === "todo") {
+                    todos.push(todo.todoData);
+                } else if (todo.todoStatus === "doing") {
+                    doings.push(todo.todoData);
+                } else {
+                    dones.push(todo.todoData);
+                }
+            });
+            var todo = { name: 'To Do', show: false, only: true, todos: [] };
+            var doing = { name: 'Doing', show: false, todos: [] };
+            var done = { name: 'Done', show: false, todos: [] };
+            todo.todos = todos;
+            doing.todos = doings;
+            done.todos = dones;
+            AllData.push(todo);
+            AllData.push(doing);
+            AllData.push(done);
+            console.log("All Data", AllData);
+            this.setState({
+                cardsData: AllData
+            })
+        }).catch((err) => console.log("err", err))
+    }
     render() {
+        if (!this.state.cardsData) {
+            return (<Container className="Lion">
+                <Row>
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </Row>
+            </Container>);
+        }
         let cards = this.state.cardsData.map((card, idx) => {
             return (
                 <Col xs={3} key={idx}>
@@ -131,4 +207,7 @@ class ThingsToDo extends Component {
     }
 }
 
-export default ThingsToDo;
+const mapStateToProps = (state) => ({
+    loginUser: state.auth.loginUser,
+})
+export default connect(mapStateToProps)(ThingsToDo);

@@ -28,21 +28,9 @@ class SignIn extends React.Component {
             this.props.setLogin(userData);
         });
     }
-    // signIn = () => {
-    //     signInWithGoogle();
-    //     auth.onAuthStateChanged(user => {
-    //         let userData = {
-    //             name: user.displayName,
-    //             email: user.email,
-    //             login: true,
-    //         }
-    //         this.props.setLogin(userData);
-    //     });
-    // }
     render() {
-        // console.log("login user data", this.props);
         if (this.props.isLog) {
-            this.props.history.push('/createlist');
+            this.props.history.push('/thingstodo');
         }
         return (
             <React.Fragment>
