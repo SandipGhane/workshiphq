@@ -3,22 +3,20 @@ import { Link, } from "react-router-dom";
 import { Modal, ModalDialog, Button, Form, Card } from "react-bootstrap";
 import "./Cards.css";
 
-const Cards = (props) => {
+const CardsCre = (props) => {
     let model;
     if (props.show) {
         model = <Modal.Body >
-            {props.only ? <div> <Form.Label>Example textarea</Form.Label><Form.Control as="textarea" rows={2} onChange={(e) => props.getTodo(e)} /><br /><Button variant="success" onClick={props.saveTodos}>Add</Button> </div> : null}
+            <Form.Label>Example textarea</Form.Label>
+            <Form.Control as="textarea" rows={2} onChange={(e) => props.getTodo(e)} /><br />
+            <Button variant="success" onClick={props.saveTodos}>Add</Button>
         </Modal.Body >
     }
     let todos;
     if (props.todos.length > 0) {
         todos = props.todos.map((msg, id) => {
             return (
-                <Card key={id}
-                    draggable
-                    onDragStart={(e) => props.dragged(e, id)}
-                    onDragOver={(e) => props.draggedEnter(e, id)}
-                    className="lists">
+                <Card key={id} className="lists">
                     <p>{msg}</p>
                 </Card>
             )
@@ -41,4 +39,4 @@ const Cards = (props) => {
         </React.Fragment >
     );
 }
-export default Cards;
+export default CardsCre;

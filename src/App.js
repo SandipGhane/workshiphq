@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Toolbar from "./ToolBar/Toolbar";
 import { BrowserRouter, Route } from "react-router-dom";
 import CreativeBoard from './CreativeBoard/CreativeBoard';
 import ThingsToDo from './ThingsToDo/ThingsToDo';
-function App() {
+import SignIn from './SignIn/SignIn';
+import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
+function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
-    <BrowserRouter>
-      <header className="App-header">
-        <Toolbar />
-      </header>
-      <Route path="/" exact component={CreativeBoard} />
-      <Route path="/thingstodo" exact component={ThingsToDo} />
-    </BrowserRouter>
-  );
+    <Route
+      {...rest}
+      render={(props) => authed === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
+    />
+  )
+}
+class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <header className="App-header">
+          <Toolbar />
+        </header>
+        <Route path="/" exact component={SignIn} />
+        <PrivateRoute authed={this.props.isLog} path="/createlist" exact component={CreativeBoard} />
+        <PrivateRoute authed={this.props.isLog} path="/thingstodo" exact component={ThingsToDo} />
+      </React.Fragment>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isLog: state.auth.isLoggin,
+})
+export default connect(mapStateToProps)(App);

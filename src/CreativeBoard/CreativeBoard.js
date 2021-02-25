@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Cards from "../Cards/Cards";
+import Cards from "../Cards/CardsCre";
 import { Link } from "react-router-dom";
 import "../App.css";
 class CreativeBoard extends Component {
@@ -8,9 +8,9 @@ class CreativeBoard extends Component {
         showModal: false,
         todoMsg: '',
         cardsData: [
-            { name: 'Unit Backlog', show: false, todos: [] },
-            { name: 'Creative-Next', show: false, todos: [] },
-            { name: 'Creative-Doing', show: false, todos: [] },
+            { name: 'Unit Backlog', show: false, only: true, todos: [] },
+            { name: 'Creative-Next', show: false, only: true, todos: [] },
+            { name: 'Creative-Doing', show: false, only: true, todos: [] },
         ]
     }
     handleClick = (e, id) => {
@@ -49,7 +49,7 @@ class CreativeBoard extends Component {
         let cards = this.state.cardsData.map((card, id) => {
             return (
                 <Col xs={3} key={id}>
-                    <Cards name={card.name} msg={this.state.todoMsg} saveTodos={(e) => this.setTodos(e, id)} getTodo={(e) => this.setTodo(e)} todos={card.todos} show={card.show} clicked={(e) => this.handleClick(e, id)} />
+                    <Cards only={card.only} name={card.name} msg={this.state.todoMsg} saveTodos={(e) => this.setTodos(e, id)} getTodo={(e) => this.setTodo(e)} todos={card.todos} show={card.show} clicked={(e) => this.handleClick(e, id)} />
                 </Col>
             )
         })
