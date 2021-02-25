@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import "../App.css";
 import { Container, Navbar, Button, Form, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import "../App.css";
 import { logout } from "../store/actions";
 import { auth } from "../firebase/firebaseConfig";
 class Toolbar extends Component {
@@ -25,7 +24,7 @@ class Toolbar extends Component {
             <Container className="toolbar">
                 <Navbar expand="lg" variant="light" bg="nav.navbar.navbar-expand-lg.navbar-light.bg-light">
                     {this.props.isLog ? <Navbar.Brand><Button variant="success">{this.props.loginUser.name}</Button></Navbar.Brand> : <Navbar.Brand href="#"><Button variant="secondary">Boards</Button></Navbar.Brand>}
-                    {this.props.isLog ? <Navbar.Brand><Button variant="danger" onClick={this.logout}>LogOut</Button></Navbar.Brand> : null}
+                    {this.props.isLog ? <Navbar.Brand href="/"><Button variant="danger" onClick={this.logout}>LogOut</Button></Navbar.Brand> : null}
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
