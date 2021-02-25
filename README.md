@@ -19,4 +19,4 @@
 
 4) Then Open Browser on following domain
 
-```http://localhost:3000/
+```http://localhost:3000/```
