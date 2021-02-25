@@ -16,3 +16,7 @@
 3) Start App using 
 
 ```npm start```
+
+4) Then Open Browser on following domain
+
+```http://localhost:3000/
