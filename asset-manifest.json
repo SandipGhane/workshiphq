@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/workshiphq/static/css/main.802bb2dc.chunk.css",
+    "main.js": "/workshiphq/static/js/main.019231c8.chunk.js",
+    "main.js.map": "/workshiphq/static/js/main.019231c8.chunk.js.map",
+    "runtime-main.js": "/workshiphq/static/js/runtime-main.b09ce9b6.js",
+    "runtime-main.js.map": "/workshiphq/static/js/runtime-main.b09ce9b6.js.map",
+    "static/css/2.150d169a.chunk.css": "/workshiphq/static/css/2.150d169a.chunk.css",
+    "static/js/2.96eac088.chunk.js": "/workshiphq/static/js/2.96eac088.chunk.js",
+    "static/js/2.96eac088.chunk.js.map": "/workshiphq/static/js/2.96eac088.chunk.js.map",
+    "index.html": "/workshiphq/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/workshiphq/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.802bb2dc.chunk.css.map": "/workshiphq/static/css/main.802bb2dc.chunk.css.map",
+    "static/js/2.96eac088.chunk.js.LICENSE.txt": "/workshiphq/static/js/2.96eac088.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b09ce9b6.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.96eac088.chunk.js",
+    "static/css/main.802bb2dc.chunk.css",
+    "static/js/main.019231c8.chunk.js"
+  ]
+}
