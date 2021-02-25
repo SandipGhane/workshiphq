@@ -1,7 +1,7 @@
 # WorkshipHQ Assignment
 
 ## netlify production link
-[Check Deploy link](https://60364b6d78bd9d0008ce76ce--sharp-cori-18781c.netlify.app/)
+[Check Deploy link](https://sharp-cori-18781c.netlify.app/)
 
 ## Steps to run localy
 
@@ -16,3 +16,7 @@
 3) Start App using 
 
 ```npm start```
+
+4) Then Open Browser on following domain
+
+```http://localhost:3000/```
